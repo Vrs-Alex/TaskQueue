@@ -5,6 +5,7 @@ import com.vrsalex.task_queue.domain.TaskStatusHistory
 import com.vrsalex.task_queue.service.TaskChangedHistoryService
 import com.vrsalex.task_queue.service.TaskStatusHistoryService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,6 +14,7 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/history")
+@Tag(name = "Task History", description = "Логи, история задач")
 class TaskHistoryController(
     private val statusHisService: TaskStatusHistoryService,
     private val changedHisService: TaskChangedHistoryService

@@ -10,6 +10,7 @@ import com.vrsalex.task_queue.dto.model.PageResponse
 import com.vrsalex.task_queue.dto.model.TaskResponse
 import com.vrsalex.task_queue.service.TaskService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -29,6 +30,7 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/tasks")
+@Tag(name = "Tasks", description = "Управление задачами")
 class TaskController(
     private val taskService: TaskService
 ) {
