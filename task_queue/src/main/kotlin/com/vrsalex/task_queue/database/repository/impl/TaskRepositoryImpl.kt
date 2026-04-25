@@ -31,9 +31,9 @@ class TaskRepositoryImpl(
         to: OffsetDateTime?,
         pageable: Pageable
     ): Page<Task> =
-        jpa.findWithFilters(status, type, from, to, pageable)
+        jpa.findWithFilters(status?.name, type?.name, from, to, pageable)
             .map { it.toDomain() }
 
     override fun findAllByStatus(status: TaskStatus): List<Task> =
-        jpa.findAllByStatus(status).map { it.toDomain() }
+        jpa.findAllByStatus(status.name).map { it.toDomain() }
 }

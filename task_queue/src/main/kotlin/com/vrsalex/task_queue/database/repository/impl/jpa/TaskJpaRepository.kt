@@ -14,21 +14,21 @@ import java.util.UUID
 
 interface TaskJpaRepository : JpaRepository<TaskEntity, UUID> {
 
-    fun findAllByStatus(status: TaskStatus): List<TaskEntity>
+    fun findAllByStatus(status: String): List<TaskEntity>
 
     @Query("""
-        SELECT t FROM TaskEntity t
-        WHERE (:status IS NULL OR t.status = :status)
-          AND (:type IS NULL OR t.type = :type)
-          AND (:from IS NULL OR t.createdAt >= :from)
-          AND (:to IS NULL OR t.createdAt <= :to)
-        ORDER BY t.priority DESC, t.createdAt ASC
-    """)
+    SELECT * FROM task
+    WHERE (CAST(:status AS VARCHAR) IS NULL OR status = :status)
+      AND (CAST(:type AS VARCHAR) IS NULL OR type = :type)
+      AND (CAST(:from AS TIMESTAMPTZ) IS NULL OR created_at >= :from)
+      AND (CAST(:to AS TIMESTAMPTZ) IS NULL OR created_at <= :to)
+    ORDER BY priority DESC, created_at DESC
+""", nativeQuery = true)
     fun findWithFilters(
-        status: TaskStatus?,
-        type: TaskType?,
-        from: OffsetDateTime?,
-        to: OffsetDateTime?,
+        @Param("status") status: String?,
+        @Param("type") type: String?,
+        @Param("from") from: OffsetDateTime?,
+        @Param("to") to: OffsetDateTime?,
         pageable: Pageable
     ): Page<TaskEntity>
 

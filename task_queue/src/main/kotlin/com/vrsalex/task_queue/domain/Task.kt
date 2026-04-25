@@ -14,4 +14,17 @@ data class Task(
     val errorMessage: String?,
     val createdAt: Instant,
     val updatedAt: Instant
+){
+    fun transitionTo(next: TaskStatus): Task {
+        require(status.canTransitionTo(next)) {
+            "Статус задачи не может быть изменен с $status на $next"
+        }
+        return copy(status = next, updatedAt = Instant.now())
+    }
+}
+
+data class TaskCreate(
+    val filePath: String,
+    val type: TaskType,
+    val priority: Int
 )

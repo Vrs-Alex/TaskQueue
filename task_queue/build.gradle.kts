@@ -37,9 +37,9 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-	implementation("io.minio:minio:8.6.0")
+	//	implementation("io.minio:minio:8.6.0")
 
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
 
 
 	implementation("org.springframework.boot:spring-boot-starter")

@@ -1,11 +1,14 @@
 spring:
   application:
     name: task_queue
+  mvc:
+    servlet:
+      path: /v1/api
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/taskqueue
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/taskqueue}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -22,9 +25,11 @@ spring:
       locations: classpath:db/migration
       baseline-on-migrate: true
 
+springdoc:
+  openapi:
+    use-fqn: true
+  default-flat-param-object: true
 
 app:
   workers:
     count: 3
-    max-retries: 3
-    stuck-threshold-minutes: 10
